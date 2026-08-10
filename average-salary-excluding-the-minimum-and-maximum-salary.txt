@@ -1,0 +1,10 @@
+#include <algorithm>
+class Solution {
+public:
+    double average(vector<int>& salary) {
+        double sum=0;
+        auto[min, max] = std::minmax_element(salary.begin(),salary.end());
+        sum = std::accumulate(salary.begin(),salary.end(),0);
+        return (sum-(*min+*max))/(salary.size()-2);
+    }
+};
