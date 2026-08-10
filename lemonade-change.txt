@@ -1,0 +1,49 @@
+//this has horrible efficiecy
+class Solution {
+public:
+    bool lemonadeChange(vector<int>& bills) {
+        vector<int> hand;
+        hand.reserve(bills.size());
+        for(int i = 0; i<bills.size(); i++)
+        {
+        if(bills[i]==5)hand.push_back(5);//perfect bill, no change needed
+        if(bills[i]==10)
+        {
+            if(std::count(hand.begin(),hand.end(),5)<1)return false; //no 5er to change
+            else
+            {
+                hand.push_back(10);
+                hand.erase(std::find(hand.begin(),hand.end(),5)); 
+
+            }
+        }
+        if(bills[i]==20)
+        {
+
+
+
+            if((std::count(hand.begin(),hand.end(),10)<1||std::count(hand.begin(),hand.end(),5)<1)&&std::count(hand.begin(),hand.end(),5)<3)return false;
+            else 
+            {
+                if(std::count(hand.begin(),hand.end(),10)>0&&std::count(hand.begin(),hand.end(),5)>0)
+                {
+                hand.push_back(20);
+                hand.erase(std::find(hand.begin(),hand.end(),10));
+                hand.erase(std::find(hand.begin(),hand.end(),5));
+                }
+                else
+                {
+
+                hand.push_back(20);
+                hand.erase(std::find(hand.begin(),hand.end(),5));
+                                hand.erase(std::find(hand.begin(),hand.end(),5));
+                                                hand.erase(std::find(hand.begin(),hand.end(),5));
+                }
+
+            }
+        }
+        }
+    return true;
+    }
+
+};
