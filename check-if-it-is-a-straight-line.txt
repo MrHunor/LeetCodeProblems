@@ -1,0 +1,28 @@
+class Solution {
+public:
+    bool checkStraightLine(vector<vector<int>>& coordinates) {
+
+        // calculate m in m*x+t
+
+        float xVal; // to protect against divison by zero
+        xVal = (coordinates[1][0] - coordinates[0][0]);
+
+        if (xVal == 0) // special case! line is completly vertical! m = Infinty
+        {
+            for (int i = 2; i < coordinates.size(); i++) {
+                if (coordinates[1][0] != coordinates[i][0])
+                    return false;
+            }
+            return true;
+        }
+        float m = (coordinates[1][1] - coordinates[0][1]) / xVal;
+        // calculate t by putting it into a point
+        float t = coordinates[0][1] - (m * coordinates[0][0]);
+
+        for (int i = 2; i < coordinates.size(); i++) {
+            if (m * coordinates[i][0] + t != coordinates[i][1])
+                return false;
+        }
+        return true;
+    }
+};
